@@ -4,22 +4,37 @@ import common._
 object Main {
   def main(args: Array[String]) {
     println("Pascal's Triangle")
-    for (row <- 0 to 10) {
-      for (col <- 0 to row)
-        print(pascal(col, row) + " ")
-      println()
-    }
+      for (row <- 0 to 10) {
+        for (col <- 0 to row)
+          print(pascal(col, row) + " ")
+            println()
+      }
   }
 
   /**
    * Exercise 1
    */
-  def pascal(c: Int, r: Int): Int = ???
+  def pascal(c: Int, r: Int): Int = {
+    // if (c == 0 || c == r || r == 0) 
+    if (c == 0 || c == r) 
+      1
+    else
+      pascal(c - 1, r - 1) + pascal(c, r - 1)
+  }
 
   /**
    * Exercise 2
    */
-  def balance(chars: List[Char]): Boolean = ???
+  def balance(chars: List[Char]): Boolean = {
+    var sum = 0
+      chars.foreach { e =>
+        if(e == '(')
+          sum += 1
+        else if(e == ')') sum -= 1
+          if(sum < 0) return false
+      }
+    sum == 0
+  } 
 
   /**
    * Exercise 3
