@@ -43,7 +43,7 @@ object Lists {
    * @throws java.util.NoSuchElementException if `xs` is an empty list
    */
   def max(xs: List[Int]): Int = xs.size match{
-    case 0 => throw new RuntimeException("maximum of empty list")
+    case 0 => throw new NoSuchElementException("maximum of empty list")
     case 1 => xs.head
     case _ => if(xs.head > max(xs.tail)) xs.head else max(xs.tail)
   }
