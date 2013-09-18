@@ -25,14 +25,25 @@ object Main {
     * Exercise 2
     */
   def balance(chars: List[Char]): Boolean = {
-    var sum = 0
-    chars.foreach { e =>
-      if(e == '(')
-        sum += 1
-      else if(e == ')') sum -= 1
-      if(sum < 0) return false
+    def balanceIter(acc: Long, chars: List[Char]): Boolean = {
+      if (acc < 0)
+        false
+      else {
+        if (chars.isEmpty)
+          acc == 0
+        else {
+          if (chars.head == '(')
+            balanceIter(acc + 1, chars.tail)
+          else {
+            if (chars.head == ')')
+              balanceIter(acc - 1, chars.tail)
+            else
+              balanceIter(acc, chars.tail)
+          }
+        }
+      }
     }
-    sum == 0
+    balanceIter(0, chars)
   }
 
   /**
