@@ -120,4 +120,15 @@ class FunSetSuite extends FunSuite {
       assert(!contains(u, 3), "Intersection 3")
     }
   }
+
+  test("diff subtracts the sets") {
+    new TestSets {
+      val s = union(s1, s2)
+      val t = union(s2, s3)
+      val u = diff(s, t)
+      assert(contains(u, 1), "Diff 1")
+      assert(!contains(u, 2), "Diff 2")
+      assert(!contains(u, 3), "Diff 3")
+    }
+  }
 }
