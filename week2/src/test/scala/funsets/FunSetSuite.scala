@@ -150,4 +150,14 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("exists returns true if predicate == true for at least one element") {
+    new TestSets {
+      val s = union(s3,union(s1, s2))
+      assert(exists(s, (x: Int) => x > 1), "Exists 1")
+      assert(exists(s, (x: Int) => x < 3), "Exists 2")
+      assert(!exists(s, (x: Int) => x < 1), "Exists 3")
+      assert(!exists(s, (x: Int) => x > 3), "Exists 4")
+    }
+  }
+
 }
