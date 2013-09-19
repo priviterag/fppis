@@ -160,4 +160,15 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("map returns a new set applying the function f") {
+    new TestSets {
+      val s = union(s3,union(s1, s2))
+      assert(contains(map(s, (x: Int) => x * x), 1), "Map 1")
+      assert(contains(map(s, (x: Int) => x * x), 4), "Map 2")
+      assert(contains(map(s, (x: Int) => x * x), 9), "Map 3")
+      assert(!contains(map(s, (x: Int) => x * x), 16), "Map 4")
+      assert(!contains(map(s, (x: Int) => x * x), 1001), "Map 5")
+    }
+  }
+
 }
