@@ -141,4 +141,13 @@ class FunSetSuite extends FunSuite {
     }
   }
 
+  test("forall returns true if predicate == true for all elements") {
+    new TestSets {
+      val s = union(s3,union(s1, s2))
+      assert(forall(s, (x: Int) => x > 0), "Forall 1")
+      assert(forall(s, (x: Int) => x < 4), "Forall 2")
+      assert(!forall(s, (x: Int) => x > 2), "Forall 3")
+    }
+  }
+
 }
