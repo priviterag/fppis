@@ -137,7 +137,9 @@ class FunSetSuite extends FunSuite {
       val s = union(s3,union(s1, s2))
       assert(contains(filter(s, (x: Int) => x > 2), 3), "Filter 1")
       assert(!contains(filter(s, (x: Int) => x > 2), 1), "Filter 2")
-      assert(!contains(filter(s, (x: Int) => x > 2), 2), "Filter 1")
+      assert(!contains(filter(s, (x: Int) => x > 2), 2), "Filter 3")
+      assert(!contains(filter(s, (x: Int) => x > 2), 0), "Filter 4")
+      assert(!contains(filter(s, (x: Int) => x > 2), 4), "Filter 5")
     }
   }
 
