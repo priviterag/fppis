@@ -55,7 +55,12 @@ abstract class TweetSet {
     * Question: Should we implment this method here, or should it remain abstract
     * and be implemented in the subclasses?
     */
-  def union(that: TweetSet): TweetSet = ???
+  def union(that: TweetSet): TweetSet = {
+    var u: TweetSet = new Empty
+    this.foreach(tw => u = u.incl(tw))
+    that.foreach(tw => u = u.incl(tw))
+    u
+  }
 
   /**
     * Returns the tweet from this set which has the greatest retweet count.
