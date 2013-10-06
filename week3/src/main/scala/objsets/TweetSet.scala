@@ -81,7 +81,7 @@ abstract class TweetSet {
     */
   def descendingByRetweet: TweetList = {
     if(isEmpty) Nil
-    else new Cons(mostRetweeted, this.remove(mostRetweeted).descendingByRetweet)
+    else new Cons(mostRetweeted, (this.remove(mostRetweeted)).descendingByRetweet)
   }
 
 
@@ -154,8 +154,8 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
 
   def mostRetweeted: Tweet = {
     if(left.isEmpty && right.isEmpty) elem
-    else if(left.isEmpty) if(elem.retweets >= right.mostRetweeted.retweets) elem else right.mostRetweeted
-    else if(elem.retweets >= left.mostRetweeted.retweets) elem else left.mostRetweeted
+    else if(left.isEmpty) if(elem.retweets > right.mostRetweeted.retweets) elem else right.mostRetweeted
+    else if(elem.retweets > left.mostRetweeted.retweets) elem else left.mostRetweeted
   }
 
   def isEmpty = false
