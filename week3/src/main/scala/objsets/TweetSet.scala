@@ -55,12 +55,9 @@ abstract class TweetSet {
     * Question: Should we implment this method here, or should it remain abstract
     * and be implemented in the subclasses?
     */
-  def union(that: TweetSet): TweetSet = {
-    var u: TweetSet = new Empty
-    this.foreach(tw => u = u.incl(tw))
-    that.foreach(tw => u = u.incl(tw))
-    u
-  }
+  def union(that: TweetSet): TweetSet = unionAcc(that)
+
+  def unionAcc(acc: TweetSet): TweetSet
 
   /**
     * Returns the tweet from this set which has the greatest retweet count.
@@ -117,6 +114,8 @@ class Empty extends TweetSet {
 
   def filterAcc(p: Tweet => Boolean, acc: TweetSet): TweetSet = acc
 
+  def unionAcc(acc: TweetSet): TweetSet = acc
+
   /**
     * The following methods are already implemented
     */
@@ -138,6 +137,10 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
     } else {
       right.filterAcc(p, left.filterAcc(p, acc))
     }
+  }
+
+  def unionAcc(acc: TweetSet): TweetSet = {
+    right.unionAcc(left.unionAcc(acc.incl(elem)))
   }
 
   /**
