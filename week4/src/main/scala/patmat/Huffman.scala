@@ -113,7 +113,11 @@ object Huffman {
     * If `trees` is a list of less than two elements, that list should be returned
     * unchanged.
     */
-  def combine(trees: List[CodeTree]): List[CodeTree] = ???
+  def combine(trees: List[CodeTree]): List[CodeTree] = trees match {
+    case _::Nil => trees
+    case (x:Leaf)::(y:Leaf)::tail =>
+      List(Fork(Leaf(x.char,x.weight),Leaf(y.char,y.weight),List(x.char, y.char), x.weight + y.weight)) ::: tail
+  }
 
   /**
     * This function will be called in the following way:
@@ -132,7 +136,9 @@ object Huffman {
     *    the example invocation. Also define the return type of the `until` function.
     *  - try to find sensible parameter names for `xxx`, `yyy` and `zzz`.
     */
-  def until(xxx: ???, yyy: ???)(zzz: ???): ??? = ???
+  def until(s: List[CodeTree] => Boolean, c: List[CodeTree] => List[CodeTree])(t: List[CodeTree]): List[CodeTree] = {
+    t
+  }
 
   /**
     * This function creates a code tree which is optimal to encode the text `chars`.
