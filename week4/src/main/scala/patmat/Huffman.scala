@@ -77,7 +77,12 @@ object Huffman {
     *       println("integer is  : "+ theInt)
     *   }
     */
-  def times(chars: List[Char]): List[(Char, Int)] = ???
+  def times(chars: List[Char]): List[(Char, Int)] = {
+    val xs = chars.sorted
+    val keys = xs.toSet.toList
+    val freq = for(key <- keys) yield xs.count(char => char == key)
+    keys.zip(freq)
+  }
 
   /**
     * Returns a list of `Leaf` nodes for a given frequency table `freqs`.
