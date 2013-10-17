@@ -58,6 +58,9 @@ object Huffman {
     case p::xs => sort(for(x <- xs if lt(x, p)) yield x, lt) ::: List(p) ::: sort(for(x <- xs if !lt(x, p)) yield x, lt)
   }
 
+  def sortChars(xs: List[Char]): List[Char] = sort[Char](xs, (x,y) => x < y)
+  def sortCodeTreesByWeight(xs: List[CodeTree]): List[CodeTree] = sort[CodeTree](xs, (x,y) => weight(x) < weight(y))
+
   /**
     * This function computes for each unique character in the list `chars` the number of
     * times it occurs. For example, the invocation
