@@ -44,4 +44,13 @@ class HuffmanSuite extends FunSuite {
       assert(decode(t1, encode(t1)("ab".toList)) === "ab".toList)
     }
   }
+
+  test("sort an array of characters") {
+    assert(sort[Char]("deafbca".toList, (x,y) => x < y) === "aabcdef".toList)
+  }
+
+  test("sort an array of CodeTree") {
+    assert(sort[CodeTree](List(Leaf('b',2), Leaf('a',1)), (x,y) => weight(x) < weight(y)) === List(Leaf('a',1), Leaf('b',2)))
+  }
+
 }

@@ -50,6 +50,15 @@ object Huffman {
   def string2Chars(str: String): List[Char] = str.toList
 
   /**
+    *  Helper functions
+    */
+  def sort[A](xs: List[A], lt: (A, A) => Boolean): List[A] = xs match {
+    case Nil => xs
+    case x::Nil => xs
+    case p::xs => sort(for(x <- xs if lt(x, p)) yield x, lt) ::: List(p) ::: sort(for(x <- xs if !lt(x, p)) yield x, lt)
+  }
+
+  /**
     * This function computes for each unique character in the list `chars` the number of
     * times it occurs. For example, the invocation
     *
@@ -115,8 +124,7 @@ object Huffman {
     */
   def combine(trees: List[CodeTree]): List[CodeTree] = trees match {
     case _::Nil => trees
-    case (x:Leaf)::(y:Leaf)::tail =>
-      List(Fork(Leaf(x.char,x.weight),Leaf(y.char,y.weight),List(x.char, y.char), x.weight + y.weight)) ::: tail
+    case left::right::tail => makeCodeTree(left, right) :: tail
   }
 
   /**
