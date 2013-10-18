@@ -62,7 +62,18 @@ object Huffman {
 
   def sortCodeTreesByWeight(xs: List[CodeTree]): List[CodeTree] = sort[CodeTree](xs, (x,y) => weight(x) < weight(y))
 
-  def uniq[A](xs: List[A]): List[A] = xs.toSet.toList
+  def contains[A](elem: A, xs: List[A]): Boolean = xs match {
+    case Nil => false
+    case x::xs => if(x == elem) true else contains(elem, xs)
+  }
+
+  def uniq[A](xs: List[A]): List[A] = {
+    def uniqIter[A](acc: List[A], xs: List[A]): List[A] = xs match {
+      case Nil => acc
+      case x::xs => if(contains(x, acc)) uniqIter(acc, xs) else uniqIter(acc:::List(x), xs)
+    }
+    uniqIter(Nil, xs)
+  }
 
   def countChar(c: Char, xs: List[Char]): Int = {
     def countCharIter(acc: Int, xs: List[Char]): Int = xs match {
@@ -76,7 +87,7 @@ object Huffman {
     case Nil => Nil
     case x::xs => xs2 match {
       case Nil => Nil
-      case y::ys => (x, y) :: zip(xs, ys)
+      case y::ys => (x, y) :: zip[A,B](xs, ys)
     }
   }
 
@@ -112,7 +123,7 @@ object Huffman {
     val xs = sortChars(chars)
     val keys = uniq[Char](xs)
     val freq = for(key <- keys) yield countChar(key, xs)
-    keys.zip(freq)
+    zip[Char,Int](keys, freq)
   }
 
   /**

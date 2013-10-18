@@ -67,4 +67,8 @@ class HuffmanSuite extends FunSuite {
     assert(zip[Char,Int](List('a','b'), List(1,2)) === List(('a',1), ('b',2)))
   }
 
+  test("uniq elements in a list") {
+    assert(uniq(List(1,2,2,3,3)) === List(1,2,3))
+  }
+
 }
