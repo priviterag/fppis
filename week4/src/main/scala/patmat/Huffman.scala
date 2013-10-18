@@ -72,6 +72,14 @@ object Huffman {
     countCharIter(0, xs)
   }
 
+  def zip[A,B](xs1: List[A], xs2: List[B]): List[(A,B)] = xs1 match {
+    case Nil => Nil
+    case x::xs => xs2 match {
+      case Nil => Nil
+      case y::ys => (x, y) :: zip(xs, ys)
+    }
+  }
+
   /**
     * This function computes for each unique character in the list `chars` the number of
     * times it occurs. For example, the invocation

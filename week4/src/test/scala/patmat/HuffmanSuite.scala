@@ -63,4 +63,8 @@ class HuffmanSuite extends FunSuite {
     assert(countChar('a', "abcda".toList) == 2)
   }
 
+  test("zip two lists"){
+    assert(zip[Char,Int](List('a','b'), List(1,2)) === List(('a',1), ('b',2)))
+  }
+
 }
