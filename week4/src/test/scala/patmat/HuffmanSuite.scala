@@ -96,4 +96,8 @@ class HuffmanSuite extends FunSuite {
     assert(reverse[Char]("abc".toList) === "cba".toList)
   }
 
+  test("codeBits") {
+    val t1 = List(('a',List(0)), ('b',List(1,0)), ('c',List(1,1)))
+    assert(codeBits(t1)('c') === List(1,1))
+  }
 }
