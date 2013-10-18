@@ -30,6 +30,10 @@ class HuffmanSuite extends FunSuite {
     assert(string2Chars("hello, world") === List('h', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd'))
   }
 
+  test("times") {
+    assert(times(List('a', 'b', 'a')) === List(('a', 2), ('b', 1)))
+  }
+
   test("makeOrderedLeafList for some frequency table") {
     assert(makeOrderedLeafList(List(('t', 2), ('e', 1), ('x', 3))) === List(Leaf('e',1), Leaf('t',2), Leaf('x',3)))
   }
@@ -53,6 +57,10 @@ class HuffmanSuite extends FunSuite {
   test("sort a List of CodeTrees") {
     assert(sort[CodeTree](List(Leaf('b',2), Leaf('a',1)), (x,y) => weight(x) < weight(y)) === List(Leaf('a',1), Leaf('b',2)))
     assert(sortCodeTreesByWeight(List(Leaf('b',2), Leaf('a',1))) === List(Leaf('a',1), Leaf('b',2)))
+  }
+
+  test("count a char occurrence in a List[Char]") {
+    assert(countChar('a', "abcda".toList) == 2)
   }
 
 }

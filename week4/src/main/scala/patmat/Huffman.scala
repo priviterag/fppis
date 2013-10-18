@@ -59,7 +59,18 @@ object Huffman {
   }
 
   def sortChars(xs: List[Char]): List[Char] = sort[Char](xs, (x,y) => x < y)
+
   def sortCodeTreesByWeight(xs: List[CodeTree]): List[CodeTree] = sort[CodeTree](xs, (x,y) => weight(x) < weight(y))
+
+  def uniq[A](xs: List[A]): List[A] = xs.toSet.toList
+
+  def countChar(c: Char, xs: List[Char]): Int = {
+    def countCharIter(acc: Int, xs: List[Char]): Int = xs match {
+      case Nil => acc
+      case x::xs => if(x == c) countCharIter(acc + 1, xs) else countCharIter(acc, xs)
+    }
+    countCharIter(0, xs)
+  }
 
   /**
     * This function computes for each unique character in the list `chars` the number of
@@ -90,9 +101,9 @@ object Huffman {
     *   }
     */
   def times(chars: List[Char]): List[(Char, Int)] = {
-    val xs = chars.sorted
-    val keys = xs.toSet.toList
-    val freq = for(key <- keys) yield xs.count(char => char == key)
+    val xs = sortChars(chars)
+    val keys = uniq[Char](xs)
+    val freq = for(key <- keys) yield countChar(key, xs)
     keys.zip(freq)
   }
 
@@ -105,6 +116,7 @@ object Huffman {
     */
   def makeOrderedLeafList(freqs: List[(Char, Int)]): List[Leaf] = {
     val sortedFreqs = freqs.sortWith((x,y) => x._2 < y._2)
+    //val sortedFreqs = sortCodeTreesByWeight(freqs)
     for(x <- sortedFreqs) yield new Leaf(x._1, x._2)
   }
 
