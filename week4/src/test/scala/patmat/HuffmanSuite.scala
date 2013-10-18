@@ -75,4 +75,8 @@ class HuffmanSuite extends FunSuite {
     assert(until(singleton,combine)(List(Leaf('a',1),Leaf('b',2))) === List(Fork(Leaf('a',1),Leaf('b',2),List('a','b'),3)))
   }
 
+  test("createCodeTree") {
+    assert(createCodeTree("bab".toList) === Fork(Leaf('a',1),Leaf('b',2),List('a','b'),3))
+  }
+
 }
