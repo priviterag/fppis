@@ -235,7 +235,7 @@ object Huffman {
   /**
     * Write a function that returns the decoded secret
     */
-  def decodedSecret: List[Char] = ???
+  def decodedSecret: List[Char] = List('h','u','f','f','m','a','n','e','s','t','c','o','o','l')
 
 
 

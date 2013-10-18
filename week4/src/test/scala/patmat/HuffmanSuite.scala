@@ -83,4 +83,8 @@ class HuffmanSuite extends FunSuite {
     assert(decode(createCodeTree("abcaba".toList), List(0,1,0,1,1,0,1,0,0)) === "abcaba".toList)
   }
 
+  test("decode secret") {
+    assert(decode(frenchCode, secret) === List('h','u','f','f','m','a','n','e','s','t','c','o','o','l'))
+  }
+
 }
