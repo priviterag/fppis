@@ -100,6 +100,13 @@ object Huffman {
     }
   }
 
+  def reverse[A](xs: List[A]): List[A] = {
+    def reverseIter(acc: List[A], xs: List[A]): List[A] = xs match {
+      case Nil => acc
+      case x::xs => reverseIter(x::acc, xs)
+    }
+    reverseIter(Nil, xs)
+  }
 
   /**
     * This function computes for each unique character in the list `chars` the number of
@@ -216,7 +223,7 @@ object Huffman {
         case x::xs => decodeIter(acc, xs, if(x == 0) left else right)
       }
     }
-    decodeIter(Nil, bits, tree).reverse
+    reverse[Char](decodeIter(Nil, bits, tree))
   }
 
   /**
