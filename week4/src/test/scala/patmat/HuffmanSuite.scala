@@ -87,6 +87,11 @@ class HuffmanSuite extends FunSuite {
     assert(decode(frenchCode, secret) === List('h','u','f','f','m','a','n','e','s','t','c','o','o','l'))
   }
 
+  test("encode decode secret") {
+    val decoded = List('h','u','f','f','m','a','n','e','s','t','c','o','o','l')
+    assert(decode(frenchCode, encode(frenchCode)(decoded)) === decoded)
+  }
+
   test("reverse") {
     assert(reverse[Char]("abc".toList) === "cba".toList)
   }
