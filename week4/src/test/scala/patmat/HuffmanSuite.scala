@@ -79,8 +79,8 @@ class HuffmanSuite extends FunSuite {
     assert(createCodeTree("bab".toList) === Fork(Leaf('b',2),Leaf('a',1),List('b', 'a'),3))
   }
 
-  test("decodeChar") {
-    assert(decodeChar(createCodeTree("bab".toList), List(0)) === 'b')
+  test("decode") {
+    assert(decode(createCodeTree("abcaba".toList), List(0,1,0,1,1,0,1,0,0)) === "abcaba".toList)
   }
 
 }
