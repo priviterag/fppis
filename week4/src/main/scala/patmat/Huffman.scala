@@ -134,8 +134,7 @@ object Huffman {
     * of a leaf is the frequency of the character.
     */
   def makeOrderedLeafList(freqs: List[(Char, Int)]): List[Leaf] = {
-    val sortedFreqs = freqs.sortWith((x,y) => x._2 < y._2)
-    //val sortedFreqs = sortCodeTreesByWeight(freqs)
+    val sortedFreqs = sort[(Char, Int)](freqs, (a:(Char,Int),b:(Char,Int)) => a._2 < b._2)
     for(x <- sortedFreqs) yield new Leaf(x._1, x._2)
   }
 
@@ -178,8 +177,8 @@ object Huffman {
     *    the example invocation. Also define the return type of the `until` function.
     *  - try to find sensible parameter names for `xxx`, `yyy` and `zzz`.
     */
-  def until(s: List[CodeTree] => Boolean, c: List[CodeTree] => List[CodeTree])(t: List[CodeTree]): List[CodeTree] = {
-    t
+  def until(s: List[CodeTree] => Boolean, c: List[CodeTree] => List[CodeTree])(xs: List[CodeTree]): List[CodeTree] = {
+    if(s(xs)) xs else until(s,c)(c(xs))
   }
 
   /**
