@@ -91,6 +91,16 @@ object Huffman {
     }
   }
 
+  def decodeChar(tree: CodeTree, bits: List[Bit]): Char = tree match {
+    case Leaf(char,_) => char
+    case Fork(left,right,_,_) => bits match {
+      case 0::tail => decodeChar(left, tail)
+      case 1::tail => decodeChar(right, tail)
+      case _ => throw new java.util.NoSuchElementException("decodeChar: wrong encoding")
+    }
+  }
+
+
   /**
     * This function computes for each unique character in the list `chars` the number of
     * times it occurs. For example, the invocation
@@ -157,7 +167,7 @@ object Huffman {
     */
   def combine(trees: List[CodeTree]): List[CodeTree] = trees match {
     case _::Nil => trees
-    case left::right::tail => makeCodeTree(left, right) :: tail
+    case left::right::tail => sortCodeTreesByWeight(makeCodeTree(right,left) :: tail)
   }
 
   /**
