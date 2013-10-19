@@ -304,7 +304,7 @@ object Huffman {
     * use it in the `convert` method above, this merge method might also do some transformations
     * on the two parameter code tables.
     */
-  def mergeCodeTables(a: CodeTable, b: CodeTable): CodeTable = uniq[(Char, List[Bit])](a:::b)
+  def mergeCodeTables(a: CodeTable, b: CodeTable): CodeTable = a:::b
 
   /**
     * This function encodes `text` according to the code tree `tree`.
@@ -315,7 +315,7 @@ object Huffman {
   def quickEncode(tree: CodeTree)(text: List[Char]): List[Bit] = {
     def quickEncodeIter(acc: List[Bit], text: List[Char], table: CodeTable):List[Bit] = text match {
       case Nil => reverse(acc)
-      case x::xs => quickEncodeIter(codeBits(table)(x):::acc , xs, table)
+      case x::xs => quickEncodeIter(reverse(codeBits(table)(x)):::acc , xs, table)
     }
     quickEncodeIter(Nil, text, convert(tree))
   }

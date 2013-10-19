@@ -100,4 +100,14 @@ class HuffmanSuite extends FunSuite {
     val t1 = List(('a',List(0)), ('b',List(1,0)), ('c',List(1,1)))
     assert(codeBits(t1)('c') === List(1,1))
   }
+
+  test("convert") {
+    assert(convert(createCodeTree("aaabbc".toList)) === List(('a',List(0)), ('b',List(1,0)), ('c',List(1,1))))
+  }
+
+  test("quickEncode") {
+    val decoded = "aaabbc".toList
+    val codeTree = createCodeTree(decoded)
+    assert(quickEncode(codeTree)(decoded) === encode(codeTree)(decoded))
+  }
 }
