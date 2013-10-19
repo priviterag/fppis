@@ -90,10 +90,6 @@ class HuffmanSuite extends FunSuite {
     assert(createCodeTree("bab".toList) === Fork(Leaf('a',1),Leaf('b',2),List('a', 'b'),3))
   }
 
-  test("decode") {
-    assert(decode(createCodeTree("abcaba".toList), List(0,1,0,1,1,0,1,0,0)) === "abcaba".toList)
-  }
-
   test("decode secret") {
     assert(decode(frenchCode, secret) === List('h','u','f','f','m','a','n','e','s','t','c','o','o','l'))
   }
@@ -110,10 +106,6 @@ class HuffmanSuite extends FunSuite {
   test("codeBits") {
     val t1 = List(('a',List(0)), ('b',List(1,0)), ('c',List(1,1)))
     assert(codeBits(t1)('c') === List(1,1))
-  }
-
-  test("convert") {
-    assert(convert(createCodeTree("aaabbc".toList)) === List(('a',List(0)), ('b',List(1,0)), ('c',List(1,1))))
   }
 
   test("quickEncode") {
