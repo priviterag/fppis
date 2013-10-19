@@ -91,15 +91,6 @@ object Huffman {
     }
   }
 
-  def decodeChar(tree: CodeTree, bits: List[Bit]): Char = tree match {
-    case Leaf(char,_) => char
-    case Fork(left,right,_,_) => bits match {
-      case 0::tail => decodeChar(left, tail)
-      case 1::tail => decodeChar(right, tail)
-      case _ => throw new java.util.NoSuchElementException("decodeChar: wrong encoding")
-    }
-  }
-
   def reverse[A](xs: List[A]): List[A] = {
     def reverseIter(acc: List[A], xs: List[A]): List[A] = xs match {
       case Nil => acc
