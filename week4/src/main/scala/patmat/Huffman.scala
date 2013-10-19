@@ -173,6 +173,7 @@ object Huffman {
     * unchanged.
     */
   def combine(trees: List[CodeTree]): List[CodeTree] = trees match {
+    case Nil => trees
     case _::Nil => trees
     case left::right::tail => sortCodeTreesByWeight(makeCodeTree(right,left) :: tail)
   }
