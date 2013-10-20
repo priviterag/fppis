@@ -34,7 +34,7 @@ object Anagrams {
     *  same character, and are represented as a lowercase character in the occurrence list.
     */
   def wordOccurrences(w: Word): Occurrences =
-    (for((k,v) <- w.toList groupBy(e => e)) yield (k, v.size)).toList.sorted
+    (for((k,v) <- w.toList groupBy(e => e.toLower)) yield (k, v.size)).toList.sorted
 
   /** Converts a sentence into its character occurrence list. */
   def sentenceOccurrences(s: Sentence): Occurrences = ???
