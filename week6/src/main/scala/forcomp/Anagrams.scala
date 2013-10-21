@@ -61,6 +61,15 @@ object Anagrams {
   /** Returns all the anagrams of a given word. */
   def wordAnagrams(word: Word): List[Word] = dictionaryByOccurrences(wordOccurrences(word))
 
+  /** helper functions */
+  def charOccurrences(occurrence: (Char,Int)): Occurrences = {
+    def loop(n: Int, acc: Occurrences): Occurrences = {
+      if(n == 0) acc
+      else loop(n-1, (occurrence._1, n)::acc)
+    }
+    loop(occurrence._2, Nil)
+  }
+
   /** Returns the list of all subsets of the occurrence list.
     *  This includes the occurrence itself, i.e. `List(('k', 1), ('o', 1))`
     *  is a subset of `List(('k', 1), ('o', 1))`.
