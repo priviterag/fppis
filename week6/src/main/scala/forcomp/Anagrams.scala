@@ -70,6 +70,13 @@ object Anagrams {
     loop(occurrence._2, Nil)
   }
 
+  //scala> occurrencesToString(List(('a',2), ('b',3)))
+  //res1: String = aabbb
+  def occurrencesToString(xs: Occurrences): String = {
+    def occurrenceToString(x: (Char,Int)): String = (for(i <- 1 to x._2) yield x._1).mkString
+    xs.foldLeft("")((b,a) => b + occurrenceToString(a)).toString
+  }
+
   /** Returns the list of all subsets of the occurrence list.
     *  This includes the occurrence itself, i.e. `List(('k', 1), ('o', 1))`
     *  is a subset of `List(('k', 1), ('o', 1))`.
@@ -92,7 +99,11 @@ object Anagrams {
     *  Note that the order of the occurrence list subsets does not matter -- the subsets
     *  in the example above could have been displayed in some other order.
     */
-  def combinations(occurrences: Occurrences): List[Occurrences] = ???
+  def combinations(occurrences: Occurrences): List[Occurrences] = {
+    val s = occurrencesToString(occurrences)
+    val xs = (0 to s.size).flatMap(s.combinations).toList
+    xs map { wordOccurrences(_) }
+  }
 
   /** Subtracts occurrence list `y` from occurrence list `x`.
     *
