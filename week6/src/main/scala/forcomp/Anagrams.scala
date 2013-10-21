@@ -37,7 +37,8 @@ object Anagrams {
     (for((k,v) <- w.toList groupBy(e => e.toLower)) yield (k, v.size)).toList.sorted
 
   /** Converts a sentence into its character occurrence list. */
-  def sentenceOccurrences(s: Sentence): Occurrences = ???
+  def sentenceOccurrences(s: Sentence): Occurrences =
+    wordOccurrences(s.foldLeft("")((b,a) => b + a.toString))
 
 
   /** The `dictionaryByOccurrences` is a `Map` from different occurrences to a sequence of all
