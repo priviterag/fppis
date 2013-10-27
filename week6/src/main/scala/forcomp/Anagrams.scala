@@ -115,7 +115,13 @@ object Anagrams {
     *  Note: the resulting value is an occurrence - meaning it is sorted
     *  and has no zero-entries.
     */
-  def subtract(x: Occurrences, y: Occurrences): Occurrences = x diff y
+  def subtract(x: Occurrences, y: Occurrences): Occurrences = {
+    val xs = for(ox <- x; oy <- y) yield {
+      if(ox._1 == oy._1) (ox._1, ox._2 - oy._2)
+      else ox
+    }
+    xs filter(x => x._2 > 0)
+  }
 
   /** Returns a list of all anagram sentences of the given sentence.
     *
