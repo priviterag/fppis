@@ -62,13 +62,6 @@ object Anagrams {
   def wordAnagrams(word: Word): List[Word] = dictionaryByOccurrences(wordOccurrences(word))
 
   /** helper functions */
-  def charOccurrences(occurrence: (Char,Int)): Occurrences = {
-    def loop(n: Int, acc: Occurrences): Occurrences = {
-      if(n == 0) acc
-      else loop(n-1, (occurrence._1, n)::acc)
-    }
-    loop(occurrence._2, Nil)
-  }
 
   //scala> occurrencesToString(List(('a',2), ('b',3)))
   //res1: String = aabbb
@@ -116,9 +109,9 @@ object Anagrams {
     *  and has no zero-entries.
     */
   def subtract(x: Occurrences, y: Occurrences): Occurrences = {
-    val xs = for(ox <- x; oy <- y) yield {
-      if(ox._1 == oy._1) (ox._1, ox._2 - oy._2)
-      else ox
+    val xs = for((x1,x2) <- x; (y1,y2) <- y) yield {
+      if(x1 == y1) (x1, x2 - y2)
+      else (x1,x2)
     }
     xs filter(x => x._2 > 0)
   }
@@ -164,5 +157,17 @@ object Anagrams {
     *  Note: There is only one anagram of an empty sentence.
     */
   def sentenceAnagrams(sentence: Sentence): List[Sentence] = ???
+
+
+  def mySentenceAnagrams(sentence: Sentence): List[Occurrences] = {
+    // def loop(acc: List[Sentence], xs: List[Occurrences]): List[Sentence] = xs match {
+    //   case Nil => acc
+    //   case h::t => acc
+    // }
+    // loop(Nil, combinations(sentenceOccurrences(sentence)))
+    combinations(sentenceOccurrences(sentence))
+  }
+
+
 
 }
