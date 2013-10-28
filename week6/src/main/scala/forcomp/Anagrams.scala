@@ -4,6 +4,9 @@ import common._
 
 object Anagrams {
 
+  val emptyString = ""
+
+
   /** A word is simply a `String`. */
   type Word = String
 
@@ -38,7 +41,7 @@ object Anagrams {
 
   /** Converts a sentence into its character occurrence list. */
   def sentenceOccurrences(s: Sentence): Occurrences =
-    wordOccurrences(s.foldLeft("")((b,a) => b + a.toString))
+    wordOccurrences(s.foldLeft(emptyString)((a,b) => a + b))
 
 
   /** The `dictionaryByOccurrences` is a `Map` from different occurrences to a sequence of all
