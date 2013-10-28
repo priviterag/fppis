@@ -116,6 +116,12 @@ object Anagrams {
     xs filter(x => x._2 > 0)
   }
 
+
+  def combinationToWords(combination: Occurrences): Sentence = {
+    dictionaryByOccurrences.get(combination).toList.flatten
+  }
+
+
   /** Returns a list of all anagram sentences of the given sentence.
     *
     *  An anagram of a sentence is formed by taking the occurrences of all the characters of
@@ -157,17 +163,5 @@ object Anagrams {
     *  Note: There is only one anagram of an empty sentence.
     */
   def sentenceAnagrams(sentence: Sentence): List[Sentence] = ???
-
-
-  def mySentenceAnagrams(sentence: Sentence): List[Occurrences] = {
-    // def loop(acc: List[Sentence], xs: List[Occurrences]): List[Sentence] = xs match {
-    //   case Nil => acc
-    //   case h::t => acc
-    // }
-    // loop(Nil, combinations(sentenceOccurrences(sentence)))
-    combinations(sentenceOccurrences(sentence))
-  }
-
-
 
 }
