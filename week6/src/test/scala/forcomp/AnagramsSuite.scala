@@ -61,6 +61,38 @@ class AnagramsSuite extends FunSuite {
   }
 
 
+  test("subtract: jimmy - my") {
+    val jimmy = wordOccurrences("jimmy")
+    val my = wordOccurrences("my")
+    val jim = wordOccurrences("jim")
+    assert(subtract(jimmy, my) === jim)
+  }
+
+
+  test("subtract: ok - ok") {
+    val ok1 = wordOccurrences("ok")
+    val ok2 = wordOccurrences("ok")
+    assert(subtract(ok1, ok2) === List())
+  }
+
+
+  test("subtract: abba - abba") {
+    val abba1 = wordOccurrences("abba")
+    val abba2 = wordOccurrences("abba")
+    assert(subtract(abba1, abba2) === List())
+  }
+
+
+  test("subtract: assessment - assess") {
+    val assessment = wordOccurrences("assessment")
+    val assess = wordOccurrences("assess")
+    val ment = wordOccurrences("ment")
+    assert(subtract(assessment, assess) === ment)
+  }
+
+
+
+
   test("combinations: []") {
     assert(combinations(Nil) === List(Nil))
   }
