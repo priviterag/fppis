@@ -115,13 +115,6 @@ class AnagramsSuite extends FunSuite {
   }
 
 
-  test("combinationToWords: eat") {
-    val xs = List(('a',1), ('e',1), ('t',1))
-    val words = List("ate", "eat", "tea")
-    assert(combinationToWords(xs) === words)
-  }
-
-
   test("sentence anagrams: []") {
     val sentence = List()
     assert(sentenceAnagrams(sentence) === List(Nil))

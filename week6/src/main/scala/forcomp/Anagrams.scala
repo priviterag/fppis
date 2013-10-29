@@ -118,11 +118,6 @@ object Anagrams {
   }
 
 
-  def combinationToWords(combination: Occurrences): Sentence = {
-    dictionaryByOccurrences.get(combination).toList.flatten
-  }
-
-
   /** Returns a list of all anagram sentences of the given sentence.
     *
     *  An anagram of a sentence is formed by taking the occurrences of all the characters of
@@ -170,7 +165,7 @@ object Anagrams {
         for {
           occurrence <- combinations(occurrences)
           word <- dictionaryByOccurrences(occurrence)
-          sentence <- loop(subtract(occurrences, wordOccurrences(word)))
+          sentence <- loop(subtract(occurrences, occurrence))
         } yield word::sentence
       }
     }
