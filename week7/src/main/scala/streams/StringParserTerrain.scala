@@ -56,8 +56,8 @@ trait StringParserTerrain extends GameDef {
     val rows = levelVector.size
     val cols = levelVector.head.size
     pos => {
-      (pos.y >= 0 && pos.y < rows) &&
-      (pos.x >= 0 && pos.x < cols) &&
+      (pos.x >= 0 && pos.x < rows) &&
+      (pos.y >= 0 && pos.y < cols) &&
       (levelVector(pos.x)(pos.y) != '-')
     }
   }
